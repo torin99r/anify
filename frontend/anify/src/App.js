@@ -46,7 +46,7 @@ class ListForm extends React.Component {
         <Form.Group controlId="formGroupEmail">
           <Form.Control 
             type="text"
-            placeholder="Enter email"
+            placeholder="Enter username"
             onChange={(event) => this.handleUsernameForm(event)}
           />
         </Form.Group>

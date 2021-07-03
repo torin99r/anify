@@ -1,7 +1,10 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
-import Form from 'react-bootstrap/Form'
+import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button';
 import './App.css';
 
@@ -26,32 +29,33 @@ class ListForm extends React.Component {
     const list = this.state.list;
     const username = this.state.username;
 
-    var GoButton;
-
-    if (list && username) {
-      GoButton = (
-        <Button onClick={() => alert("Getting " + list + " for " + username)}>Go!</Button>
-      );
-    } else {
-      GoButton = null;
-    }
-
-
     return (
-      <Form>
-        <DropdownButton id="dropdown-basic-button" title={list ? list : "Choose your list"}>
-          <Dropdown.Item onClick={() => this.handleListSelection("MyAnimeList")}>MyAnimeList</Dropdown.Item>
-          <Dropdown.Item onClick={() => this.handleListSelection("AniList")}>AniList</Dropdown.Item>
-        </DropdownButton>
-        <Form.Group controlId="formGroupEmail">
-          <Form.Control 
+      <Row>
+        <Col className="justify-content-end">
+          <DropdownButton 
+            title={list ? list : "Choose your list"}
+            id="input-group-dropdown"
+          >
+            <Dropdown.Item onClick={() => this.handleListSelection("MyAnimeList")}>MyAnimeList</Dropdown.Item>
+            <Dropdown.Item onClick={() => this.handleListSelection("AniList")}>AniList</Dropdown.Item>
+          </DropdownButton>
+        </Col>
+        <Col>
+          <FormControl 
             type="text"
             placeholder="Enter username"
             onChange={(event) => this.handleUsernameForm(event)}
           />
-        </Form.Group>
-        {GoButton}
-      </Form>
+        </Col>
+        <Col>
+          <Button
+            disabled={!(list && username)}
+            onClick={() => alert("Getting " + list + " for " + username)}
+          >
+            Go!
+          </Button>
+        </Col>
+      </Row>
     )
 
   }
@@ -60,9 +64,9 @@ class ListForm extends React.Component {
 
 function App() {
   return (
-    <div>
+    <Container>
       <ListForm />
-    </div>
+    </Container>
   );
 }
 
